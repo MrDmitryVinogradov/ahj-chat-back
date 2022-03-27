@@ -20,7 +20,7 @@ app.use(
     origin: '*',
     credentials: true,
     'Access-Control-Allow-Origin': true,
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowMethods: ['GET', 'POST', 'DELETE'],
   })
 )
 
@@ -46,10 +46,11 @@ router.post('/users', async (ctx, next) => {
   }
 });
 
-router.delete('/users:id', async (ctx, next) => {
-  const index = users.findIndex((element) => element.id == ctx.params.id);
-  console.log(ctx.params.id);
+router.delete('/users:name', async (ctx, next) => {
+  console.log(ctx.params);
+  const index = users.findIndex((element) => element.name == ctx.params.name);
   if (index !== -1) {
+    console.log('OK');
     users.splice(index, 1);
     ctx.response.status = 204;
     ctx.response.body = `User successfully deleted`;
@@ -67,6 +68,7 @@ const server = http.createServer(app.callback())
 const wsServer = new WS.Server({ server });
 
 wsServer.on('connection', (ws, req) => {
+  ws.send('New user');
   ws.on('message', msg => {
     const message = msg.toString('utf-8');
   [...wsServer.clients]
@@ -74,6 +76,10 @@ wsServer.on('connection', (ws, req) => {
     .forEach(o => o.send(message));
 });
   ws.send('welcome');
+});
+
+wsServer.on('close', (ws, req) => {
+  ws.send('Bye');
 });
 
 server.listen(port);

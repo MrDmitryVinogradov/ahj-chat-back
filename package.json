@@ -1,0 +1,33 @@
+{
+  "name": "ahj-chat-back",
+  "version": "1.0.0",
+  "description": "homework",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "forever server.js",
+    "watch": "forever -w server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrDmitryVinogradov/ahj-chat-back.git"
+  },
+  "keywords": [
+    "homework"
+  ],
+  "author": "MrDmitryVinogradov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrDmitryVinogradov/ahj-chat-back/issues"
+  },
+  "homepage": "https://github.com/MrDmitryVinogradov/ahj-chat-back#readme",
+  "dependencies": {
+    "@koa/cors": "^3.2.0",
+    "forever": "^4.0.3",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.1.1",
+    "uniqid": "^5.4.0",
+    "ws": "^8.5.0"
+  }
+}
